@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, BMANRSearchMode)
 {
     BMANRSearchModeANR = 0,
     BMANRSearchModeBinarySeach = 1,
-    BMANRSearchModeBinaryTcp = 2
+    BMANRSearchModeBinaryTcpFlowControl = 2
 };
 
 
