@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     BMANRDector *tool = [BMANRDector sharedInstance];
-    [tool installTolerance:6.0];
+    [tool installTolerance:6];
     return YES;
 }
 
