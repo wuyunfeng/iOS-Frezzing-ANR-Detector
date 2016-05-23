@@ -1,0 +1,3 @@
+# BMANRDector
+An ANR (Application Not Respond) or Freeze Dector for iOS
+wait...
