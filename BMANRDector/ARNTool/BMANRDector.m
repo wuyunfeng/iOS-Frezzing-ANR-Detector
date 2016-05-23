@@ -3,7 +3,7 @@
 //  ANRReporter
 //
 //  Created by wuyunfeng on 16/5/18.
-//  Copyright © 2016年 wyf. All rights reserved.
+//  Copyright © 2016年 wyf && BaiDu Map Iphone Team All rights reserved.
 //
 
 #import "BMANRDector.h"
