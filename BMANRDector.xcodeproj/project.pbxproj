@@ -734,6 +734,7 @@
 				E1F198961CF2C43B00E683B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1F198971CF2C43B00E683B5 /* Build configuration list for PBXNativeTarget "BMANRDectorTests" */ = {
 			isa = XCConfigurationList;
@@ -742,6 +743,7 @@
 				E1F198991CF2C43B00E683B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1F1989A1CF2C43B00E683B5 /* Build configuration list for PBXNativeTarget "BMANRDectorUITests" */ = {
 			isa = XCConfigurationList;
@@ -750,6 +752,7 @@
 				E1F1989C1CF2C43B00E683B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

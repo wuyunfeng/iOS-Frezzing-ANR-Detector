@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6F4B29B29A0F27ACE5549F75B01DF2C66BB370FA",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6F4B29B29A0F27ACE5549F75B01DF2C66BB370FA" : 0,
+    "C7C6F7063BDDA3DE8369DA328451FE1D0A969DD5" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3E53D74E-8856-447E-8BA2-CA05A80D4CAF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6F4B29B29A0F27ACE5549F75B01DF2C66BB370FA" : "BMANRDector\/",
+    "C7C6F7063BDDA3DE8369DA328451FE1D0A969DD5" : "BMANRDector\/plcrashreporter\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BMANRDector",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BMANRDector.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:wuyunfeng\/BMANRDector.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6F4B29B29A0F27ACE5549F75B01DF2C66BB370FA"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/plausiblelabs\/plcrashreporter.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C7C6F7063BDDA3DE8369DA328451FE1D0A969DD5"
+    }
+  ]
+}

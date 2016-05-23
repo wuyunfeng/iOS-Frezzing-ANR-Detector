@@ -23,7 +23,10 @@
     volatile BOOL _exitStatus;
     NSTimer *_timer;
     thread_t _mainThreadTid;
+    
     long _tolerance;
+    BMANRStackTraceMode _traceMode;
+    BMANRSearchMode _searchMode;
 }
 
 static BMANRDector *sInstance;
@@ -46,6 +49,9 @@ static BMANRDector *sInstance;
         NSAssert(result == 0, @"pipe failure");
         _readFd = fds[0];
         _writeFd = fds[1];
+        
+        _traceMode = BMANRStackTraceLive;
+        _searchMode = BMANRSearchModeANR;
     }
     return self;
 }
@@ -57,13 +63,21 @@ static BMANRDector *sInstance;
 
 - (void)installTolerance:(long)tolerance
 {
+    [self installTraceMode:_traceMode tolerance:tolerance searchMode:BMANRSearchModeANR];
+}
+
+- (void)installTraceMode:(BMANRStackTraceMode)traceMode tolerance:(long)tolerance searchMode:(BMANRSearchMode)searchMode
+{
     _tolerance = tolerance;
     _exitStatus = YES;
     _mainThreadTid = pthread_mach_thread_np(pthread_self());
     _backgroudThread = [[NSThread alloc] initWithTarget:self selector:@selector(trapToKernel) object:nil];
     [_backgroudThread start];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(wakeFormKernel) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:tolerance target:self selector:@selector(wakeFormKernel) userInfo:nil repeats:YES];
+    _traceMode = traceMode;
+    _searchMode = searchMode;
 }
+
 
 - (void)uninstall
 {
@@ -98,7 +112,11 @@ static BMANRDector *sInstance;
             NSLog(@"********* select error **********");
             continue;
         } else if(0 == ret) {
-            [self dumpProccessStackTrace];
+            if (_traceMode == BMANRStackTraceLive) {
+                [self dumpProccessStackTrace];
+            } else if (_traceMode == BMANRStackTraceCrash){
+                exit(-1);//crash
+            }
         } else {
             if (FD_ISSET(_readFd, &fd_sets)) {//must
                 NSLog(@"go on");

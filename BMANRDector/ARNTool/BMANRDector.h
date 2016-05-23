@@ -8,6 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, BMANRStackTraceMode)
+{
+    BMANRStackTraceLive = 0,
+    BMANRStackTraceCrash = 1,
+    BMANRStackTraceReserved
+};
+
+typedef NS_ENUM(NSInteger, BMANRSearchMode)
+{
+    BMANRSearchModeANR = 0,
+    BMANRSearchModeBinarySeach = 1,
+    BMANRSearchModeBinaryTcp = 2
+};
+
+
 @interface BMANRDector : NSObject
 
 + (instancetype)sharedInstance;
@@ -15,6 +30,8 @@
 - (void)install;
 
 - (void)installTolerance:(long)tolerance;
+
+- (void)installTraceMode:(BMANRStackTraceMode)traceMode tolerance:(long)tolerance searchMode:(BMANRSearchMode)searchMode;
 
 - (void)uninstall;
 
