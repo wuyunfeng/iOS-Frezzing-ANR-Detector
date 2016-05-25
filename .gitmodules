@@ -1,0 +1,3 @@
+[submodule "plcrashreporter"]
+	path = plcrashreporter
+	url = https://github.com/plausiblelabs/plcrashreporter.git
