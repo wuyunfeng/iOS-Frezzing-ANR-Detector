@@ -73,7 +73,11 @@ static BMANRDector *sInstance;
     _mainThreadTid = pthread_mach_thread_np(pthread_self());
     _backgroudThread = [[NSThread alloc] initWithTarget:self selector:@selector(trapToKernel) object:nil];
     [_backgroudThread start];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:tolerance target:self selector:@selector(wakeFormKernel) userInfo:nil repeats:YES];
+    long interval = tolerance >> 1;
+    if (interval < 1) {
+        interval = 1;
+    }
+    _timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(wakeFormKernel) userInfo:nil repeats:YES];
     _traceMode = traceMode;
     _searchMode = searchMode;
 }
