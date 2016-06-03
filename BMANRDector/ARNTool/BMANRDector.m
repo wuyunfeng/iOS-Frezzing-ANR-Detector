@@ -119,7 +119,7 @@ static BMANRDector *sInstance;
             if (_traceMode == BMANRStackTraceLive) {
                 [self dumpProccessStackTrace];
             } else if (_traceMode == BMANRStackTraceCrash){
-                exit(-1);//crash
+                NSAssert(NO, @"Check The CrashLog");
             }
         } else {
             if (FD_ISSET(_readFd, &fd_sets)) {//must
