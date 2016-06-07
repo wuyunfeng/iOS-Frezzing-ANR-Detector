@@ -14,7 +14,7 @@
 #import "PLCrashReport.h"
 #import "PLCrashReportTextFormatter.h"
 #import <pthread.h>
-
+#import <UIKit/UIKit.h>
 @implementation BMANRDector
 {
     int _readFd;
@@ -27,16 +27,15 @@
     long _tolerance;
     BMANRStackTraceMode _traceMode;
     BMANRSearchMode _searchMode;
+    BOOL _enterBackground;
+    BOOL _enterForeground;
 }
 
 static BMANRDector *sInstance;
 
 + (instancetype)sharedInstance{
     if (sInstance == nil) {
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            sInstance = [[[self class] alloc] init];
-        });
+        sInstance = [[[self class] alloc] init];
     }
     return sInstance;
 }
@@ -52,6 +51,10 @@ static BMANRDector *sInstance;
         
         _traceMode = BMANRStackTraceLive;
         _searchMode = BMANRSearchModeANR;
+        _enterBackground = NO;
+        _enterForeground = NO;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationEnterForeground) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -59,6 +62,7 @@ static BMANRDector *sInstance;
 - (void)install
 {
     [self installTolerance:6.0];
+
 }
 
 - (void)installTolerance:(long)tolerance
@@ -82,6 +86,18 @@ static BMANRDector *sInstance;
     _searchMode = searchMode;
 }
 
+- (void)applicationEnterForeground
+{
+    if (_enterBackground) {
+        _enterForeground = YES;
+    }
+}
+
+- (void)applicationEnterBackground
+{
+    _enterBackground = YES;
+}
+
 
 - (void)uninstall
 {
@@ -89,6 +105,9 @@ static BMANRDector *sInstance;
     [_timer invalidate];
     close(_writeFd);
     close(_readFd);
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    sInstance = nil;
 }
 
 - (void)dealloc
@@ -116,14 +135,18 @@ static BMANRDector *sInstance;
             NSLog(@"********* select error **********");
             continue;
         } else if(0 == ret) {
-            if (_traceMode == BMANRStackTraceLive) {
-                [self dumpProccessStackTrace];
-            } else if (_traceMode == BMANRStackTraceCrash){
-                NSAssert(NO, @"Check The CrashLog");
+            if (!_enterForeground) {
+                if (_traceMode == BMANRStackTraceLive) {
+                    [self dumpProccessStackTrace];
+                } else if (_traceMode == BMANRStackTraceCrash){
+                    NSAssert(NO, @"Check The CrashLog");
+                }
+                _enterForeground = NO;
+                _enterBackground = NO;
             }
         } else {
             if (FD_ISSET(_readFd, &fd_sets)) {//must
-                NSLog(@"go on");
+                NSLog(@".....sleep.....");
                 [self nativePoll];
             }
         }
@@ -151,7 +174,7 @@ static BMANRDector *sInstance;
             NSLog(@"Could not write wake signal, errno=%d", errno);
         }
     }
-    NSLog(@"wakeup thread");
+    NSLog(@".....wakeup.....");
 }
 
 // may cost long time to dump process stacktrace
