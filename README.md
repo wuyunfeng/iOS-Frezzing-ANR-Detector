@@ -10,9 +10,11 @@
 
 `It is useful for you to locate the program problem when your Application does not respond or freezing. Too much threads may result in spending a lot time to print the proccess StackTrace. we will optimize this in future`
 
-检测应用程序无响应、冻屏并打印程序调用栈，帮助你定位程序问题(当应用程序过大，线程数太多打印调用栈可能会花费数分钟)
+检测应用程序无响应、冻屏并打印程序调用栈，帮助你定位程序问题
 
-steps:
+
+Download steps
+========================
 
 `git clone https://github.com/wuyunfeng/iOS-Frezzing-ANR-Detector.git`
 `git submodule update --init --recursive`
