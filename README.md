@@ -17,13 +17,12 @@ steps:
 `git clone https://github.com/wuyunfeng/iOS-Frezzing-ANR-Detector.git`
 `git submodule update --init --recursive`
 
-AUTHOR & Email & Team
-================
 
-wuyunfeng
-    - wyfsky888@126.com
+Design Principle
+========================
+
+![](http://p1.bpimg.com/567571/c16a5aa6e9c238ac.jpg)
     
-`iPhone Team of BaiDu Map`
 
 
 How use?
